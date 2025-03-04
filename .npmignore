@@ -1,0 +1,43 @@
+# Source files
+src/
+app/
+public/
+posts/
+
+# Config files
+.eslintrc.json
+.prettierrc
+tsconfig.json
+tsconfig.build.json
+jest.config.js
+next.config.js
+postcss.config.js
+tailwind.config.js
+
+# Development files
+node_modules/
+.next/
+coverage/
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/__tests__/
+**/__mocks__/
+
+# Misc
+.github/
+.git/
+.gitignore
+.env*
+*.md
+!README.md 

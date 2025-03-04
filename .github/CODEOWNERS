@@ -1,0 +1,18 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# they will be requested for review when someone opens a pull request.
+* @nextblog/core-team
+
+# Package configuration files
+package.json @nextblog/maintainers
+tsconfig*.json @nextblog/maintainers
+
+# Source code
+/src/ @nextblog/developers
+
+# Documentation
+/docs/ @nextblog/docs-team
+*.md @nextblog/docs-team
+
+# GitHub specific files
+/.github/ @nextblog/maintainers 

@@ -1,0 +1,80 @@
+---
+description: NextBlog MVP Rule with Tailwind + Shadcn/UI
+globs: `**/*.ts`, `**/*.tsx`, `**/*.js`, `**/*.jsx`\
+alwaysApply: false
+---
+## Description
+This rule guides the development of **NextBlog**, an npm package for Next.js that renders `.md` and `.mdx` files as blog posts. It uses Tailwind CSS for styling and Shadcn/UI components (`card`, `typography`, `button`) for a modern UI. The MVP focuses on core functionality: file detection, rendering, routing, and a minimal blog interface.
+
+## Applies To
+- **Glob Patterns**: 
+  - `**/*.ts`, `**/*.tsx`, `**/*.js`, `**/*.jsx`
+  - Exclude: `node_modules/**`, `dist/**`
+
+## Instructions for Cursor
+
+### Project Context
+- **NextBlog** is a Next.js 13+ (App Router) package.
+- Renders `.md` and `.mdx` files from `/posts` into blog posts.
+- Uses Tailwind CSS and Shadcn/UI for a clean, customizable UI.
+- MVP avoids GitHub sorting or AI features.
+
+### Coding Guidelines
+1. **Next.js Conventions**
+   - Use App Router (`app/` directory).
+   - Leverage `getStaticPaths` for static routes.
+   - Export components as default in `.tsx`.
+
+2. **TypeScript**
+   - Use explicit types (e.g., `interface Post { slug: string; title: string; date: string; content: string }`).
+
+3. **Tailwind + Shadcn/UI**
+   - Style with Tailwind (`prose`, `max-w-2xl mx-auto p-4`).
+   - Use Shadcn/UI `Card` for post previews, `Typography` for Markdown, `Button` for links.
+   - Keep UI minimal and responsive.
+
+4. **Markdown Handling**
+   - Parse `.md` with `marked`, `.mdx` with `@mdx-js/mdx`.
+   - Use `gray-matter` for front matter (`title`, `date`).
+   - Fallback to filename for slug.
+
+5. **Simplicity**
+   - No external APIs or databases.
+   - Minimal dependencies: `next`, `react`, `marked`, `@mdx-js/mdx`, `gray-matter`, `tailwindcss`, `@shadcn/ui`.
+
+### File Structure
+- **Root**: `nextblog.config.js`, `package.json`.
+- **Source**: `src/` (utils, components).
+- **Test App**: `app/` (Next.js app).
+- Reference `@cursor.md`.
+
+### Example Behaviors
+- **BlogIndex Component**:
+  ```tsx
+  import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  import { getPosts } from "@/utils/posts";
+
+  export default async function BlogIndex() {
+    const posts = await getPosts();
+    return (
+      <div className="max-w-2xl mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-6">Blog</h1>
+        <div className="space-y-4">
+          {posts.map((post) => (
+            <Card key={post.slug}>
+              <CardHeader>
+                <CardTitle>
+                  <a href={`/blog/${post.slug}`} className="text-blue-600 hover:underline">
+                    {post.title}
+                  </a>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{post.date}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }

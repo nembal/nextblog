@@ -1,0 +1,52 @@
+---
+title: "Using MDX with NextBlog"
+date: "2025-03-04"
+tags: ["mdx", "react", "advanced"]
+excerpt: "Learn how to use MDX to enhance your blog posts with React components while maintaining the simplicity of Markdown."
+---
+
+# MDX Support in NextBlog
+
+This is a sample MDX file to demonstrate how NextBlog handles MDX content.
+
+## What is MDX?
+
+MDX is a format that lets you write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content.
+
+## Example Component
+
+Here's an example of how you might use a custom component in MDX:
+
+```jsx
+import { Alert } from './components/Alert'
+
+<Alert type="info">
+  This is an alert component in MDX!
+</Alert>
+```
+
+## Code Blocks
+
+MDX supports syntax highlighting for code blocks:
+
+```javascript
+function greeting(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greeting('MDX User'));
+```
+
+## Lists and Other Markdown Features
+
+MDX supports all standard Markdown features:
+
+- Bullet lists
+- **Bold text**
+- *Italic text*
+- [Links](https://mdxjs.com/)
+- > Blockquotes
+
+## Conclusion
+
+MDX is a powerful way to enhance your blog posts with interactive components while maintaining the simplicity of Markdown. 
