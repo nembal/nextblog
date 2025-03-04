@@ -2,6 +2,10 @@
 
 A modern blog platform built with Next.js, TypeScript, and Tailwind CSS.
 
+## Demo
+
+Check out the live demo of NextBlogX [here](https://next-blog-npm.vercel.app/).
+
 ## Features
 
 - 📝 Markdown-based content management
