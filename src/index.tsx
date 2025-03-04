@@ -14,16 +14,21 @@ export interface NextBlogProps {
    * The path to render the blog at (default: '/blog')
    */
   path?: string;
+  /**
+   * The page number for pagination
+   */
+  page?: number;
 }
 
 /**
  * NextBlog component that renders a blog from Markdown files
  * This is a wrapper for use in Next.js App Router
  */
-export function NextBlog({ path = '/blog' }: NextBlogProps) {
+export function NextBlog({ path = '/blog', page }: NextBlogProps) {
   return (
     <div className="nextblog">
-      <BlogIndex path={path} />
+      {/* @ts-expect-error Async Server Component */}
+      <BlogIndex path={path} page={page} />
     </div>
   );
 }
@@ -32,10 +37,11 @@ export function NextBlog({ path = '/blog' }: NextBlogProps) {
  * NextBlogTag component that renders posts filtered by tag
  * This is a wrapper for use in Next.js App Router
  */
-export function NextBlogTag({ path = '/blog', tag }: { path?: string; tag: string }) {
+export function NextBlogTag({ path = '/blog', tag, page }: { path?: string; tag: string; page?: number }) {
   return (
     <div className="nextblog">
-      <BlogIndex path={path} tag={tag} />
+      {/* @ts-expect-error Async Server Component */}
+      <BlogIndex path={path} tag={tag} page={page} />
     </div>
   );
 }
@@ -47,10 +53,16 @@ export function NextBlogTag({ path = '/blog', tag }: { path?: string; tag: strin
 export function NextBlogPost({ path = '/blog', slug }: { path?: string; slug: string }) {
   return (
     <div className="nextblog">
+      {/* @ts-expect-error Async Server Component */}
       <BlogPost path={path} slug={slug} />
     </div>
   );
 }
+
+// Create server component versions for direct usage in RSC
+export const NextBlogServer = NextBlog;
+export const NextBlogTagServer = NextBlogTag;
+export const NextBlogPostServer = NextBlogPost;
 
 // Export components for direct usage
 export { 

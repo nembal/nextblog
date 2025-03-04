@@ -1,5 +1,5 @@
-import { BlogPost } from '@/index';
-import { getPosts } from '@/utils/posts';
+import { NextBlogPost } from '../../../src/index';
+import { getPosts } from '../../../src/utils/posts';
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -7,5 +7,5 @@ export async function generateStaticParams() {
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  return <BlogPost slug={params.slug} />;
+  return <NextBlogPost slug={params.slug} />;
 } 

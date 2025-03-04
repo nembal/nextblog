@@ -1,5 +1,5 @@
-import { NextBlogTag } from '@/index';
-import { getAllTags } from '@/utils/posts';
+import { NextBlogTag } from '../../../../src/index';
+import { getAllTags } from '../../../../src/utils/posts';
 
 export async function generateStaticParams() {
   const tags = await getAllTags();

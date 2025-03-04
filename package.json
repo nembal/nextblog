@@ -22,6 +22,7 @@
     "prepare-publish": "node scripts/prepare-publish.js",
     "version-bump": "node scripts/version-bump.js",
     "setup-github": "node scripts/setup-github.js",
+    "setup-vercel": "node scripts/setup-vercel.js",
     "start": "next start",
     "lint": "next lint",
     "test": "jest"

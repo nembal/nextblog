@@ -1,0 +1,63 @@
+name: Setup Vercel Tokens
+
+on:
+  workflow_dispatch:
+    inputs:
+      vercel_token:
+        description: 'Vercel API Token'
+        required: true
+      vercel_org_id:
+        description: 'Vercel Organization ID'
+        required: true
+      vercel_project_id:
+        description: 'Vercel Project ID'
+        required: true
+
+jobs:
+  setup-tokens:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Setup Vercel Tokens
+        uses: getsentry/action-github-app-token@v2
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+        
+      - name: Set Vercel Secrets
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ steps.setup-tokens.outputs.token }}
+          script: |
+            const { repo, owner } = context.repo;
+            
+            // Set VERCEL_TOKEN
+            await github.rest.actions.createOrUpdateRepoSecret({
+              owner,
+              repo,
+              secret_name: 'VERCEL_TOKEN',
+              encrypted_value: Buffer.from('${{ github.event.inputs.vercel_token }}').toString('base64'),
+              key_id: '${{ secrets.GH_SECRET_KEY_ID }}'
+            });
+            
+            // Set VERCEL_ORG_ID
+            await github.rest.actions.createOrUpdateRepoSecret({
+              owner,
+              repo,
+              secret_name: 'VERCEL_ORG_ID',
+              encrypted_value: Buffer.from('${{ github.event.inputs.vercel_org_id }}').toString('base64'),
+              key_id: '${{ secrets.GH_SECRET_KEY_ID }}'
+            });
+            
+            // Set VERCEL_PROJECT_ID
+            await github.rest.actions.createOrUpdateRepoSecret({
+              owner,
+              repo,
+              secret_name: 'VERCEL_PROJECT_ID',
+              encrypted_value: Buffer.from('${{ github.event.inputs.vercel_project_id }}').toString('base64'),
+              key_id: '${{ secrets.GH_SECRET_KEY_ID }}'
+            });
+            
+            console.log('Vercel secrets set successfully!'); 
