@@ -6,7 +6,7 @@ export default function Home() {
   const posts = getAllPosts();
 
   return (
-    <div>
+    <div className=" text-gray-900">
       <section className="mb-12">
         <h1 className="text-4xl font-bold mb-6">Welcome to NextBlogX</h1>
         <p className="text-xl text-gray-600 max-w-3xl mb-6">
