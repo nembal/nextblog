@@ -1,26 +1,88 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-rgb: 10, 10, 10;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .prose h1, 
+  .prose h2, 
+  .prose h3, 
+  .prose h4, 
+  .prose h5, 
+  .prose h6 {
+    @apply font-bold text-gray-900 my-6;
+  }
+
+  .prose h1 {
+    @apply text-3xl;
+  }
+
+  .prose h2 {
+    @apply text-2xl border-b border-gray-200 pb-2;
+  }
+
+  .prose h3 {
+    @apply text-xl;
+  }
+
+  .prose p {
+    @apply my-4 leading-relaxed;
+  }
+
+  .prose a {
+    @apply text-blue-600 hover:text-blue-800 transition-colors;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic text-gray-700;
+  }
+
+  .prose ul, 
+  .prose ol {
+    @apply my-4 pl-6;
+  }
+
+  .prose ul {
+    @apply list-disc;
+  }
+
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose pre {
+    @apply bg-gray-800 text-white p-4 rounded-md overflow-x-auto my-6;
+  }
+
+  .prose code {
+    @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm;
+  }
+
+  .prose pre code {
+    @apply bg-transparent text-white p-0 text-sm;
+  }
+
+  .prose img {
+    @apply rounded-lg shadow-md my-6;
+  }
+
+  .prose hr {
+    @apply my-8 border-gray-200;
+  }
 }
